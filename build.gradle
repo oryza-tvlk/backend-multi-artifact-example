@@ -1,0 +1,85 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven {
+            url "${beiartf_url}"
+            credentials(AwsCredentials) {
+                accessKey = "$System.env.BEIARTF_ACCESS_KEY_ID"
+                secretKey = "$System.env.BEIARTF_SECRET_ACCESS_KEY"
+                sessionToken = "$System.env.BEIARTF_SESSION_TOKEN"
+            }
+        }
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+    dependencies {
+        classpath "com.traveloka.common.gradle:test-common-plugin:3.3.0"
+        classpath "com.netflix.nebula:nebula-release-plugin:6.0.0"
+    }
+}
+
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+apply plugin: 'nebula.release'
+apply plugin: 'com.traveloka.common.gradle.test-module-plugin'
+
+group = "com.traveloka.common"
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "4.1"
+    distributionType = "all"
+}
+
+jar {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                   'Implementation-Version': project.version)
+    }
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+    maven {
+        url "${beiartf_url}"
+        credentials(AwsCredentials) {
+            accessKey = "$System.env.BEIARTF_ACCESS_KEY_ID"
+            secretKey = "$System.env.BEIARTF_SECRET_ACCESS_KEY"
+            sessionToken = "$System.env.BEIARTF_SESSION_TOKEN"
+        }
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "${beiartf_url}"
+            credentials(AwsCredentials) {
+                accessKey = "$System.env.BEIARTF_ACCESS_KEY_ID"
+                secretKey = "$System.env.BEIARTF_SECRET_ACCESS_KEY"
+                sessionToken = "$System.env.BEIARTF_SESSION_TOKEN"
+            }
+        }
+    }
+}
+
+tasks.getByPath("release").finalizedBy(tasks.getByPath("publish"))
+
+dependencies {
+    // put other dependencies here. Read java-library configurations first,
+    // here (https://docs.gradle.org/current/userguide/java_library_plugin.html)
+    testImplementation("org.testng:testng:6.10")
+}

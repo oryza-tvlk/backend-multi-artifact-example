@@ -1,0 +1,5 @@
+{
+  "phabricator.uri": "https://phabricator.noc.tvlk.cloud/",
+  "arc.land.onto.default": "master",
+  "load": ["backend-arcanist/src"]
+}

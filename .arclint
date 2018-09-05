@@ -1,0 +1,14 @@
+{
+  "linters": {
+    "traveloka_checkstyle": {
+      "type": "checkstyle",
+      "include": "(\\.java$)",
+      "checkstyle.jar": "checkstyle.jar",
+      "checkstyle.url": "https://repo1.maven.org/maven2/com/puppycrawl/tools/checkstyle/8.4/checkstyle-8.4.jar",
+      "checkstyle.config": "https://s3-ap-southeast-1.amazonaws.com/tvlk-dev-arcanist/traveloka_checks_latest.xml"
+    },
+    "merge-conflict": {
+      "type": "merge-conflict"
+    }
+  }
+}

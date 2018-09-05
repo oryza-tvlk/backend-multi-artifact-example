@@ -1,0 +1,9 @@
+*.iml
+*.ipr
+*.iws
+generated-src
+build/
+hs_err*
+.idea
+.gradle
+.phutil_module_cache
